@@ -1,0 +1,84 @@
+version: '3.8'
+services:
+  emqx-enterprise:
+    image: emqx/emqx-enterprise:5.0.3
+    container_name: emqx
+    healthcheck:
+      test: [ "CMD", "emqx", "ping" ]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+    ports:
+      - 1883:1883
+      - 18083:18083
+    volumes:
+      - $PWD/emqx/cluster.hocon:/opt/emqx/data/configs/cluster.hocon
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.6.1-alpine
+    container_name: clickhouse
+    ports:
+      - 8123:8123
+      - 9000:9000
+    volumes:
+      - ./clickhouse:/docker-entrypoint-initdb.d
+    environment:
+      - CLICKHOUSE_USER=admin
+      - CLICKHOUSE_PASSWORD=public
+
+  mqttx-simulate:
+    image: emqx/mqttx-cli:v1.9.3
+    container_name: mqttx-simulate
+    volumes:
+      - $PWD/mqttx/charging.js:/app/mqttx-simulate/charging.js
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mqttx simulate --file /app/mqttx-simulate/charging.js -c 5 -h emqx-enterprise -im 100
+    depends_on:
+      emqx-enterprise:
+        condition: service_healthy
+
+  mqttx:
+    image: emqx/mqttx-cli:v1.9.3
+    container_name: mqttx
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mqttx sub -t 'mqttx/simulate/#' -v -h emqx-enterprise
+    depends_on:
+      emqx-enterprise:
+        condition: service_healthy
+
+  prometheus:
+    image: prom/prometheus:v2.44.0
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - $PWD/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+
+  # TODO - install clickhouse plugin
+  grafana:
+    image: grafana/grafana:9.3.2
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=public
+    # volumes:
+      # - $PWD/emqx-exporter/config/grafana-template/EMQX5-enterprise:/grafana-dashboard-emqx5-ee
+      # - $PWD/grafana-dashboards:/grafana-dashboard-IEM
+      # - $PWD/grafana-provisioning/dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+      # - $PWD/grafana-provisioning/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+    depends_on:
+      emqx-enterprise:
+        condition: service_healthy
+      clickhouse:
+        condition: service_started
+
+networks:
+  emqx-net:
+    name: emqx-net

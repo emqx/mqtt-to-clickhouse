@@ -1,0 +1,1238 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "count",
+                "alias": "orders",
+                "field": "idTag"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "queryType": "builder",
+          "rawSql": "SELECT count(idTag) orders FROM iot_data.\"charging_order\" WHERE   ( endTimestamp  >= $__fromTime AND endTimestamp <= $__toTime ) LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Orders",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "unit": "￥"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 4,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false,
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "count",
+                "alias": "orders",
+                "field": "idTag"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "meta": {
+            "builderOptions": {
+              "database": "iot_data",
+              "fields": [],
+              "filters": [
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "key": "endTimestamp",
+                  "operator": "WITH IN DASHBOARD TIME RANGE",
+                  "restrictToFields": [
+                    {
+                      "label": "startTimestamp",
+                      "name": "startTimestamp",
+                      "picklistValues": [],
+                      "type": "DateTime"
+                    },
+                    {
+                      "label": "endTimestamp",
+                      "name": "endTimestamp",
+                      "picklistValues": [],
+                      "type": "DateTime"
+                    }
+                  ],
+                  "type": "datetime"
+                }
+              ],
+              "limit": 100,
+              "metrics": [
+                {
+                  "aggregation": "count",
+                  "alias": "orders",
+                  "field": "idTag"
+                }
+              ],
+              "mode": "aggregate",
+              "orderBy": [],
+              "table": "charging_order"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "SELECT\n  SUM(CASE WHEN toHour(timestamp) >= 0 AND toHour(timestamp) < 8 THEN power * 1.2\n           ELSE 0\n      END) AS \"00:00-08:00\",\n  SUM(CASE WHEN toHour(timestamp) >= 8 AND toHour(timestamp) < 24 THEN power * 1.6\n           ELSE 0\n      END) AS \"08:00-24:00\"\nFROM iot_data.\"charging_record\"\n  WHERE ( timestamp  >= $__fromTime AND timestamp <= $__toTime )\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Business Revenue",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 11,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "avg",
+                "alias": "avgElectricity",
+                "field": "meter"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "queryType": "builder",
+          "rawSql": "SELECT avg(meter) avgElectricity FROM iot_data.\"charging_order\" WHERE   ( endTimestamp  >= $__fromTime AND endTimestamp <= $__toTime ) LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Average Electricity per order",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 17,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "avg",
+                "field": "duration"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "hide": false,
+          "queryType": "builder",
+          "rawSql": "SELECT avg(duration) FROM iot_data.\"charging_order\" WHERE   ( endTimestamp  >= $__fromTime AND endTimestamp <= $__toTime ) LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Duration per order",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 5
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "groupBy": [],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "sum",
+                "alias": "meter",
+                "field": "meter"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "queryType": "builder",
+          "rawSql": "SELECT sum(meter) meter FROM iot_data.\"charging_order\" WHERE   ( endTimestamp  >= $__fromTime AND endTimestamp <= $__toTime ) LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Electricity",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": -5,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 20,
+        "x": 4,
+        "y": 5
+      },
+      "id": 1,
+      "options": {
+        "barRadius": 0.15,
+        "barWidth": 0.5,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {
+          "valueSize": 28
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "idTag",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [
+              "idTag"
+            ],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "groupBy": [
+              "idTag"
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "sum",
+                "alias": "",
+                "field": "meter"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [
+              {
+                "dir": "ASC",
+                "name": "idTag"
+              }
+            ],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "queryType": "builder",
+          "rawSql": "SELECT idTag, sum(meter) FROM iot_data.\"charging_order\" WHERE   ( endTimestamp  >= $__fromTime AND endTimestamp <= $__toTime ) GROUP BY idTag ORDER BY idTag ASC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Electricity per charging nozzle",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 10
+      },
+      "id": 10,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [
+              "stopReason"
+            ],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "groupBy": [
+              "stopReason"
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "count",
+                "alias": "count",
+                "field": "*"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "hide": false,
+          "queryType": "builder",
+          "rawSql": "SELECT stopReason, count(*) count FROM iot_data.\"charging_order\" WHERE   ( endTimestamp  >= $__fromTime AND endTimestamp <= $__toTime ) GROUP BY stopReason LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Disconnect Reason",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": -5,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "%"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 20,
+        "x": 4,
+        "y": 10
+      },
+      "id": 5,
+      "options": {
+        "barRadius": 0.15,
+        "barWidth": 0.5,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {
+          "valueSize": 32
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "idTag",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "iot_data",
+            "fields": [
+              "idTag"
+            ],
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "endTimestamp",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "restrictToFields": [
+                  {
+                    "label": "startTimestamp",
+                    "name": "startTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  },
+                  {
+                    "label": "endTimestamp",
+                    "name": "endTimestamp",
+                    "picklistValues": [],
+                    "type": "DateTime"
+                  }
+                ],
+                "type": "datetime"
+              }
+            ],
+            "groupBy": [
+              "idTag"
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "sum",
+                "alias": "",
+                "field": "meter"
+              }
+            ],
+            "mode": "aggregate",
+            "orderBy": [
+              {
+                "dir": "ASC",
+                "name": "idTag"
+              }
+            ],
+            "table": "charging_order"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "meta": {
+            "builderOptions": {
+              "database": "iot_data",
+              "fields": [
+                "idTag"
+              ],
+              "filters": [
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "key": "endTimestamp",
+                  "operator": "WITH IN DASHBOARD TIME RANGE",
+                  "restrictToFields": [
+                    {
+                      "label": "startTimestamp",
+                      "name": "startTimestamp",
+                      "picklistValues": [],
+                      "type": "DateTime"
+                    },
+                    {
+                      "label": "endTimestamp",
+                      "name": "endTimestamp",
+                      "picklistValues": [],
+                      "type": "DateTime"
+                    }
+                  ],
+                  "type": "datetime"
+                }
+              ],
+              "groupBy": [
+                "idTag"
+              ],
+              "limit": 100,
+              "metrics": [
+                {
+                  "aggregation": "sum",
+                  "alias": "",
+                  "field": "meter"
+                }
+              ],
+              "mode": "aggregate",
+              "orderBy": [
+                {
+                  "dir": "ASC",
+                  "name": "idTag"
+                }
+              ],
+              "table": "charging_order"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "SELECT\n    idTag,\n    SUM(duration) / (toUnixTimestamp($__toTime) - toUnixTimestamp($__fromTime)) AS idleRate\nFROM  iot_data.\"charging_order\"\nWHERE ( $__fromTime >= startTimestamp  AND $__toTime  <= endTimestamp )\nGROUP BY idTag\norder by idTag asc\nlimit 100\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Charging station Utilization Rate",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 6,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single",
+          "sort": "asc"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "builderOptions": {
+            "fields": [],
+            "filters": [
+              {
+                "key": "hour",
+                "operator": "<",
+                "type": "datetime",
+                "value": "adddays(,)"
+              },
+              {
+                "key": "hour",
+                "operator": ">=",
+                "type": "datetime",
+                "value": "todate(timestamp)"
+              },
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "timestamp",
+                "operator": ">=",
+                "type": "DateTime",
+                "value": "GRAFANA_START_TIME"
+              },
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "key": "timestamp",
+                "operator": "<=",
+                "type": "DateTime",
+                "value": "GRAFANA_END_TIME"
+              }
+            ],
+            "groupBy": [
+              "hour"
+            ],
+            "limit": 100,
+            "metrics": [
+              {
+                "aggregation": "sum",
+                "alias": "totalpower",
+                "field": "power"
+              }
+            ],
+            "mode": "trend",
+            "orderBy": [
+              {
+                "name": "hour"
+              }
+            ],
+            "table": "charging_record",
+            "timeField": "timestamp",
+            "timeFieldType": "datetime"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "bfd8c74a-9b69-47fe-ae78-91bc0a1e8582"
+          },
+          "meta": {
+            "builderOptions": {
+              "fields": [],
+              "filters": [
+                {
+                  "key": "hour",
+                  "operator": "<",
+                  "type": "datetime",
+                  "value": "adddays(,)"
+                },
+                {
+                  "key": "hour",
+                  "operator": ">=",
+                  "type": "datetime",
+                  "value": "todate(timestamp)"
+                },
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "key": "timestamp",
+                  "operator": ">=",
+                  "type": "DateTime",
+                  "value": "GRAFANA_START_TIME"
+                },
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "key": "timestamp",
+                  "operator": "<=",
+                  "type": "DateTime",
+                  "value": "GRAFANA_END_TIME"
+                }
+              ],
+              "groupBy": [
+                "hour"
+              ],
+              "limit": 100,
+              "metrics": [
+                {
+                  "aggregation": "sum",
+                  "alias": "totalpower",
+                  "field": "power"
+                }
+              ],
+              "mode": "trend",
+              "orderBy": [
+                {
+                  "name": "hour"
+                }
+              ],
+              "table": "charging_record",
+              "timeField": "timestamp",
+              "timeFieldType": "datetime"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "SELECT\n    toStartOfHour(timestamp) AS hour,\n    SUM(power) AS totalPower\nFROM\n    charging_record\nWHERE\n    hour >= toDate(timestamp) AND hour < addDays(toDate(timestamp), 1) and  toHour(timestamp) >= 8\n    \nGROUP BY\n    hour\nORDER BY\n    hour;\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Hourly Electricity",
+      "type": "barchart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "nowDelay": "6h"
+  },
+  "timezone": "",
+  "title": "ClickHouse - Charging Station",
+  "uid": "fd66fcff-3b0e-43e7-b774-f5e3774aa81e",
+  "version": 8,
+  "weekStart": ""
+}
