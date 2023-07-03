@@ -6,13 +6,13 @@ Ingesting time series & IoT data into ClickHouse using MQTT and EMQX | MQTT Clic
 
 This tutorial will show you how to use MQTT to ingest IoT data into ClickHouse. We will be using the [EMQX](https://www.emqx.io/) MQTT broker to publish and subscribe to messages. We will also be using the [ClickHouse](https://clickhouse.com/) database to store the data.
 
-With MQTT and ClickHouse, businesses can unlock the full potential of their IoT deployments. MQTT serves as the communication layer, facilitating the seamless data transfer from IoT devices to ClickHouse. ClickHouse, with its high-performance analytical capabilities, efficiently stores and processes incoming IoT data. The benefits of this combined solution include:
+With MQTT and ClickHouse, businesses can unlock the full potential of their IoT deployments. MQTT serves as the communication layer, enabling seamless data transfer from IoT devices to ClickHouse. ClickHouse, with its high-performance analytical capabilities, efficiently stores and processes incoming IoT data. The benefits of this combined solution include:
 
-- Real-time Data Analytics: MQTT facilitates real-time data streaming from IoT devices to ClickHouse, ensuring the availability of up-to-date information for analysis.
+- Real-time Data Analytics: MQTT facilitates real-time data streaming from IoT devices to ClickHouse, ensuring up-to-date information availability for analysis.
 
 - Scalability and Performance: ClickHouse's distributed architecture and columnar storage format, combined with MQTT's lightweight nature, enable seamless scalability and high-performance data processing.
 
-- Efficient Storage: ClickHouse's columnar storage format optimizes storage requirements, allowing organizations to store and retain vast amounts of IoT data cost-effectively.
+- Efficient Storage: ClickHouse's columnar storage format optimizes storage requirements, allowing organizations to cost-effectively store and retain vast amounts of IoT data.
 
 - Advanced Analytics: ClickHouse's powerful SQL-based query language and support for complex analytical functions empower users to gain valuable insights from IoT data, enabling predictive analytics, anomaly detection, and more.
 
@@ -26,15 +26,13 @@ By integrating EMQX, ClickHouse, and relevant data analysis and visualization to
 
 ## Architecture
 
-<!-- ![MQTT to ClickHouse](./image/mqtt-to-ClickHouse.jpg) -->
-
-> The architecture diagram is coming soon.
+![MQTT to ClickHouse](./image/mqtt-to-clickhouse.jpg)
 
 | Name      | Version | Description                                                                      |
 | --------- | ------- | -------------------------------------------------------------------------------- |
 | [EMQX Enterprise](https://www.emqx.com/en/products/emqx)      | 5.0.3+  | MQTT broker used for message exchange between MQTT clients and the ClickHouse. |
 | [MQTTX CLI](https://mqttx.app/cli) | 1.9.3+  | Command-line tool used to generate simulated data for testing.        |
-| [ClickHouse](https://clickhouse.com/)     | 23.6.1-alpine  | Charging station IoT data storage and management, as well as providing time aggregation and analysis capabilities for Grafana.      |
+| [ClickHouse](https://clickhouse.com/)     | 23.6.1  | Charging station IoT data storage and management, as well as providing time aggregation and analysis capabilities for Grafana.      |
 | [EMQX Exporter](https://github.com/emqx/emqx-exporter)      | 0.1 | Prometheus exporter for EMQX |
 | [Prometheus](https://prometheus.io/)   | v2.44.0  | Open-source systems monitoring and alerting toolkit.       |
 | [Grafana](https://grafana.com/)   | 9.5.1+  | Visualization platform utilized to display and analyze the collected data.       |
