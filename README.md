@@ -28,6 +28,8 @@ By integrating EMQX, ClickHouse, and relevant data analysis and visualization to
 
 <!-- ![MQTT to ClickHouse](./image/mqtt-to-ClickHouse.jpg) -->
 
+> The architecture diagram is coming soon.
+
 | Name      | Version | Description                                                                      |
 | --------- | ------- | -------------------------------------------------------------------------------- |
 | [EMQX Enterprise](https://www.emqx.com/en/products/emqx)      | 5.0.3+  | MQTT broker used for message exchange between MQTT clients and the ClickHouse. |
@@ -60,7 +62,7 @@ By integrating EMQX, ClickHouse, and relevant data analysis and visualization to
   docker logs -f mqttx
   ```
 
-4. You can connect to ClickHouse and view the data by using the following command:
+3. You can connect to ClickHouse and view the data by using the following command:
 
   ```bash
   docker exec -it clickhouse clickhouse-client --user admin --password public
@@ -69,7 +71,7 @@ By integrating EMQX, ClickHouse, and relevant data analysis and visualization to
   SELECT * FROM charging_record LIMIT 10;
   ```
 
-5. If you want to alalysis the data in Grafana, you can open <http://localhost:3000> in your browser, and login with `admin:public`, and then add ClickHouse datasource and import the dashboard from `./grafana-dashboards/charging-station.json`.(Auto import is coming soon)
+4. If you want to alalysis the data in Grafana, you can open <http://localhost:3000> in your browser, and login with `admin:public`, and then add ClickHouse datasource and import the dashboard from `./grafana-dashboards/charging-station.json`.(Auto import is coming soon)
 
 <!-- 5. (TODO) If you want to view the energy data and EMQX Metrics in Grafana dashboard, you can open <http://localhost:3000> in your browser, and login with `admin:public` -->
 
