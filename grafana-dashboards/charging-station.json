@@ -11,6 +11,12 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
@@ -18,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -70,7 +75,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.1",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "builderOptions": {
@@ -264,7 +269,7 @@
             }
           },
           "queryType": "sql",
-          "rawSql": "SELECT\n  SUM(CASE WHEN toHour(timestamp) >= 0 AND toHour(timestamp) < 8 THEN power * 1.2\n           ELSE 0\n      END) AS \"00:00-08:00\",\n  SUM(CASE WHEN toHour(timestamp) >= 8 AND toHour(timestamp) < 24 THEN power * 1.6\n           ELSE 0\n      END) AS \"08:00-24:00\"\nFROM iot_data.\"charging_record\"\n  WHERE ( timestamp  >= $__fromTime AND timestamp <= $__toTime )\n",
+          "rawSql": "SELECT\n  SUM(CASE WHEN toHour(timestamp) >= 0 AND toHour(timestamp) < 8 THEN meter * 1.2\n           ELSE 0\n      END) AS \"00:00-08:00\",\n  SUM(CASE WHEN toHour(timestamp) >= 8 AND toHour(timestamp) < 24 THEN meter * 1.6\n           ELSE 0\n      END) AS \"08:00-24:00\"\nFROM iot_data.\"charging_record\"\n  WHERE ( timestamp  >= $__fromTime AND timestamp <= $__toTime )\n",
           "refId": "A"
         }
       ],
@@ -316,7 +321,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.1",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "builderOptions": {
@@ -414,7 +419,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.1",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "builderOptions": {
@@ -516,7 +521,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.1",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "builderOptions": {
@@ -1009,7 +1014,7 @@
             }
           },
           "queryType": "sql",
-          "rawSql": "SELECT\n    idTag,\n    SUM(duration) / (toUnixTimestamp($__toTime) - toUnixTimestamp($__fromTime)) AS idleRate\nFROM  iot_data.\"charging_order\"\nWHERE ( $__fromTime >= startTimestamp  AND $__toTime  <= endTimestamp )\nGROUP BY idTag\norder by idTag asc\nlimit 100\n",
+          "rawSql": "SELECT\n    idTag,\n    SUM(duration) / (toUnixTimestamp($__toTime) - toUnixTimestamp($__fromTime)) AS idleRate\nFROM  iot_data.\"charging_order\"\nWHERE $__fromTime >= startTimestamp  AND endTimestamp <= $__toTime\nGROUP BY idTag\norder by idTag asc\nlimit 100\n",
           "refId": "A"
         }
       ],
@@ -1208,7 +1213,7 @@
             }
           },
           "queryType": "sql",
-          "rawSql": "SELECT\n    toStartOfHour(timestamp) AS hour,\n    SUM(power) AS totalPower\nFROM\n    charging_record\nWHERE\n    hour >= toDate(timestamp) AND hour < addDays(toDate(timestamp), 1) and  toHour(timestamp) >= 8\n    \nGROUP BY\n    hour\nORDER BY\n    hour;\n",
+          "rawSql": "SELECT\n    toStartOfHour(timestamp) AS hour,\n    SUM(meter) AS totalMeter\nFROM\n    charging_record\nWHERE\n    (hour >= toDate(timestamp) AND hour < addDays(toDate(timestamp), 1) and  toHour(timestamp) >= 8)\n    and ( timestamp  >= $__fromTime AND timestamp <= $__toTime )\nGROUP BY\n    hour\nORDER BY\n    hour;\n",
           "refId": "A"
         }
       ],
@@ -1217,22 +1222,20 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-2d",
     "to": "now"
   },
-  "timepicker": {
-    "nowDelay": "6h"
-  },
+  "timepicker": {},
   "timezone": "",
   "title": "ClickHouse - Charging Station",
   "uid": "fd66fcff-3b0e-43e7-b774-f5e3774aa81e",
-  "version": 8,
+  "version": 1,
   "weekStart": ""
 }
