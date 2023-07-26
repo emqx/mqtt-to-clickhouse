@@ -15,11 +15,12 @@ function generator(faker, options) {
   let clientData = clients[clientId];
   // 如果该 clientId 不存在对应的状态和计数器，则初始化
   if (!clientData) {
-    // 从过去的 6 小时开始模拟
-    const startTimestamp = Date.now() - 6 * 3600 * 1000;
+    // 从过去的 48 小时开始模拟
+    const startTimestamp = Date.now() - 48 * 3600 * 1000;
     const power = faker.helpers.arrayElement(powerOptions)
     clientData = {
       lastChargeStart: null,
+      startPower: power,
       // 充电功率千瓦
       power: power,
       // 充电电压伏特
@@ -99,7 +100,7 @@ function generator(faker, options) {
     // 模拟充电过程中的温度变化
     clientData.currentTemperature = adjustTemperature(clientData.currentTemperature, faker);
     // 模拟充电过程中的功率变化
-    clientData.power = adjustPower(clientData.timePercentage, clientData.currentTemperature, clientData.power);
+    clientData.power = adjustPower(clientData.timePercentage, clientData.currentTemperature, clientData.power, clientData.startPower);
     // 计算 10 秒内的电表读数
     const currentMeter = Number((clientData.power * 10 / 3600).toFixed(4));
     clientData.meter = clientData.meter + currentMeter;
@@ -173,10 +174,10 @@ function adjustTemperature(currentTemperature, faker) {
 }
 
 // Function to adjust power based on time percentage and temperature
-function adjustPower(timePercentage, currentTemperature, power) {
+function adjustPower(timePercentage, currentTemperature, power, startPower) {
   for (const adjustment of powerAdjustmentTable) {
     if (timePercentage > adjustment.threshold || currentTemperature > adjustment.temperatureThreshold) {
-      return Number((power * adjustment.factor).toFixed(2));
+      return Number((startPower * adjustment.factor).toFixed(2));
     }
   }
   return Number(power.toFixed(2));
