@@ -30,8 +30,8 @@ By integrating EMQX, ClickHouse, and relevant data analysis and visualization to
 
 | Name      | Version | Description                                                                      |
 | --------- | ------- | -------------------------------------------------------------------------------- |
-| [EMQX Enterprise](https://www.emqx.com/en/products/emqx)      | 5.0.3+  | MQTT broker used for message exchange between MQTT clients and the ClickHouse. |
-| [MQTTX CLI](https://mqttx.app/cli) | 1.9.3+  | Command-line tool used to generate simulated data for testing.        |
+| [EMQX Enterprise](https://www.emqx.com/en/products/emqx)      | 5.5.1+  | MQTT broker used for message exchange between MQTT clients and the ClickHouse. |
+| [MQTTX CLI](https://mqttx.app/cli) | 1.9.9+  | Command-line tool used to generate simulated data for testing.        |
 | [ClickHouse](https://clickhouse.com/)     | 23.6.1  | Charging station IoT data storage and management, as well as providing time aggregation and analysis capabilities for Grafana.      |
 | [Grafana](https://grafana.com/)   | 9.5.1+  | Visualization platform utilized to display and analyze the collected data.       |
 

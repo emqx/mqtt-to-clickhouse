@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   emqx-enterprise:
-    image: emqx/emqx-enterprise:5.0.3
+    image: emqx/emqx-enterprise:5.5.1
     container_name: emqx
     healthcheck:
       test: [ "CMD", "emqx", "ping" ]
@@ -30,7 +30,7 @@ services:
       - CLICKHOUSE_PASSWORD=public
 
   mqttx-simulate:
-    image: emqx/mqttx-cli:v1.9.3
+    image: emqx/mqttx-cli:v1.9.9
     container_name: mqttx-simulate
     volumes:
       - $PWD/mqttx/charging.js:/app/mqttx-simulate/charging.js
@@ -44,7 +44,7 @@ services:
         condition: service_healthy
 
   mqttx:
-    image: emqx/mqttx-cli:v1.9.3
+    image: emqx/mqttx-cli:v1.9.9
     container_name: mqttx
     command:
       - /bin/sh

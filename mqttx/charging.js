@@ -27,7 +27,7 @@ function generator(faker, options) {
       voltage: faker.helpers.arrayElement(voltageOptions),
       // 充电开始时间
       startTimestamp: startTimestamp,
-      // 充点结束时间
+      // 充电结束时间
       endTimestamp: startTimestamp + faker.helpers.arrayElement(chargeTimeDuration) * 60 * 1000,
       // 时间百分比
       timePercentage: 0,
